@@ -1,0 +1,24 @@
+name: PGM
+version: Development Build 01
+description: PGM plugin by TheMolkaPL
+author: TheMolkaPL
+prefix: PGM
+main: pl.themolka.pgm.PGM
+
+commands:
+    join:
+        descripton: Join the current match
+        aliases: [play]
+        usage: /join [team] - defaults to random
+    maplist:
+        description: Shows all the maps that are currently loaded including ones thatare
+        aliases: [maps|ml]
+        usage: /maplist [page]
+    myteam:
+        description: Shows you what team you are on
+        aliases: [mt]
+        usage: /myteam
+    pgm:
+        description: PGM's Settings
+        usage: /pgm <setting>
+        permission: pgm.settings

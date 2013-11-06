@@ -1,0 +1,28 @@
+world-name: DefaultMap
+teams:
+    blue:
+        name: Blue Team
+        spawn-kit: [272, 261, 278, 320, 397, 262]
+        spawn:
+            x: -0
+            y: 64
+            z: -0
+            yaw: 0
+            pitch: 0
+        core:
+            x: -0
+            y: 64
+            z: -0
+    red:
+        name: Red Team
+        spawn-kit: [272, 261, 278, 320, 397, 262]
+        spawn:
+            x: 0
+            y: 64
+            z: 0
+            yaw: 0
+            pitch: 0
+        core:
+            x: 0
+            y: 64
+            z: 0

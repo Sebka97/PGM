@@ -3,6 +3,7 @@ package pl.themolka.pgm.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.DyeColor;
 import org.bukkit.GameMode;
@@ -14,6 +15,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import pl.themolka.pgm.PGM;
+import pl.themolka.pgm.api.events.PlayerJoinTeamEvent;
 import pl.themolka.pgm.files.MapYAML;
 
 public class Teams {
@@ -102,41 +104,50 @@ public class Teams {
 	}
 	
 	public static void setTeam(Player player, String team) {
-		if(Teams.getBluePlayers.size() >= 0) {
+		if(Teams.getBluePlayers.size() >= MapYAML.getMaxPlayers()) {
 			if(!(player.hasPermission("pgm.vip.joinfull") || team.equalsIgnoreCase("obs"))) {
 				player.sendMessage(ChatColor.GOLD + "This match is full! Purcharse VIP to join full matches!");
 				return;
 			}
 		}
-		if(joinable = false) {
-			player.sendMessage(ChatColor.RED + "You can not join to the team at this time, " + ChatColor.GOLD + "Please wait!");
-			return;
-		}
 		if(team == null) {
+			if(joinable = false) {
+				player.sendMessage(ChatColor.RED + "You can not join to the team at this time, " + ChatColor.GOLD + "Please wait!");
+				return;
+			}
 			if(!Teams.isObservator(player) && Teams.getBluePlayers.contains(player.getName()) || Teams.getRedPlayers.contains(player.getName())) {
 				player.sendMessage(ChatColor.RED + "You are already joined to the team!");
 				return;
 			}
 			if(Teams.getBluePlayers.size() > Teams.getRedPlayers.size()) {
 				// Red Team
-				Teams.getRedPlayers.add(player.getName());
-				join(player, "red");
+				PlayerJoinTeamEvent event = new PlayerJoinTeamEvent(player, team);
+				Bukkit.getPluginManager().callEvent(event);
+				
+				Teams.getRedPlayers.add(event.getPlayer().getName());
+				join(event.getPlayer(), "red");
 				player.sendMessage(ChatColor.DARK_PURPLE + "You have joined to the " + ChatColor.RED + MapYAML.getRedName() + ChatColor.DARK_PURPLE + ".");
 				return;
 			}
 			if(Teams.getBluePlayers.size() < Teams.getRedPlayers.size()) {
 				// Blue Team
-				Teams.getBluePlayers.add(player.getName());
-				join(player, "blue");
+				PlayerJoinTeamEvent event = new PlayerJoinTeamEvent(player, team);
+				Bukkit.getPluginManager().callEvent(event);
+				
+				Teams.getBluePlayers.add(event.getPlayer().getName());
+				join(event.getPlayer(), "blue");
 				player.sendMessage(ChatColor.DARK_PURPLE + "You have joined to the " + ChatColor.DARK_BLUE + MapYAML.getBlueName() + ChatColor.DARK_PURPLE + ".");
 				return;
 			} else {
 				// Hmm... random :)
 				// Red Team
-				Teams.getRedPlayers.add(player.getName());
-				join(player, "red");
+				PlayerJoinTeamEvent event = new PlayerJoinTeamEvent(player, team);
+				Bukkit.getPluginManager().callEvent(event);
+				
+				Teams.getRedPlayers.add(event.getPlayer().getName());
+				join(event.getPlayer(), "red");
 				player.sendMessage(ChatColor.DARK_PURPLE + "You have joined to the " + ChatColor.RED + MapYAML.getRedName() + ChatColor.DARK_PURPLE + ".");
-;				return;
+				return;
 			}
 		}
 		if(team.equalsIgnoreCase("obs")) {
@@ -157,24 +168,33 @@ public class Teams {
 			player.sendMessage(ChatColor.GOLD + "We sorry," + ChatColor.RED + " join to specify team is only for VIP members!");
 			return;
 		}
+		if(joinable = false) {
+			player.sendMessage(ChatColor.RED + "You can not join to the team at this time, " + ChatColor.GOLD + "Please wait!");
+			return;
+		}
 		if(!Teams.isObservator(player) && Teams.getBluePlayers.contains(player.getName()) || Teams.getRedPlayers.contains(player.getName())) {
 			player.sendMessage(ChatColor.RED + "You are already joined to the team!");
 			return;
 		}
 		if(team.equalsIgnoreCase("blue")) {
 			// Blue Team
-			Teams.getBluePlayers.add(player.getName());
-			join(player, "blue");
+			// Blue Team
+			PlayerJoinTeamEvent event = new PlayerJoinTeamEvent(player, team);
+			Bukkit.getPluginManager().callEvent(event);
+			
+			Teams.getBluePlayers.add(event.getPlayer().getName());
+			join(event.getPlayer(), "blue");
 			player.sendMessage(ChatColor.DARK_PURPLE + "You have joined to the " + ChatColor.DARK_BLUE + MapYAML.getBlueName() + ChatColor.DARK_PURPLE + ".");
-			Game.start();
 			return;
 		}
 		if(team.equalsIgnoreCase("red")) {
 			// Red Team
-			Teams.getRedPlayers.add(player.getName());
-			join(player, "red");
+			PlayerJoinTeamEvent event = new PlayerJoinTeamEvent(player, team);
+			Bukkit.getPluginManager().callEvent(event);
+			
+			Teams.getRedPlayers.add(event.getPlayer().getName());
+			join(event.getPlayer(), "red");
 			player.sendMessage(ChatColor.DARK_PURPLE + "You have joined to the " + ChatColor.RED + MapYAML.getRedName() + ChatColor.DARK_PURPLE + ".");
-			Game.start();
 			return;
 		} else {
 			player.sendMessage(ChatColor.RED + "Team \"" + team + "\" not found!");

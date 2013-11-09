@@ -13,6 +13,21 @@ public class Game {
 	
 	public static void finish(String won) {
 		Teams.setJoinable(false);
+		if(won == null) {
+			for(Player player : Bukkit.getOnlinePlayers()) {
+				if(player.isOnline()) {
+					Teams.getBluePlayers.remove(Teams.getBluePlayers);
+					Teams.getRedPlayers.remove(Teams.getRedPlayers);
+					
+					player.setGameMode(GameMode.CREATIVE);
+					player.getInventory().setItem(0, new ItemStack(Material.COMPASS, 1));
+					
+					Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "########################");
+					Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "# " + ChatColor.YELLOW + "This match doesn't has winning team!" + ChatColor.DARK_PURPLE + " #");
+					Bukkit.broadcastMessage(ChatColor.DARK_PURPLE + "########################");
+				}
+			}
+		}
 		if(won.equalsIgnoreCase("red")) {
 			for(String playerStr : Teams.getBluePlayers) {
 				Player player = Bukkit.getPlayer(playerStr);

@@ -7,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerPickupItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import pl.themolka.pgm.PGM;
@@ -86,13 +85,6 @@ public class Gamer implements Listener {
 				e.setCancelled(true);
 				e.getPlayer().sendMessage(ChatColor.RED + "You can not place blocks in the monument!");
 			}
-		}
-	}
-	
-	@EventHandler
-	public void onPlayerPickupItem(PlayerPickupItemEvent e) {
-		if(e.getRemaining() == 35) {
-			e.setCancelled(true);
 		}
 	}
 	

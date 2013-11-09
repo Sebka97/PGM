@@ -1,8 +1,13 @@
 world-name: DefaultMap
+about:
+    author: TheMolkaPL
+    version: 1.0
+    description: The default look of PGM
+max-players: 25
+spawn-kit: [272, 261, 278, 320, 397, 262]
 teams:
     blue:
         name: Blue Team
-        spawn-kit: [272, 261, 278, 320, 397, 262]
         spawn:
             x: -0
             y: 64
@@ -15,7 +20,6 @@ teams:
             z: -0
     red:
         name: Red Team
-        spawn-kit: [272, 261, 278, 320, 397, 262]
         spawn:
             x: 0
             y: 64

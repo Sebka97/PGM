@@ -35,8 +35,6 @@ public class MyteamCommand implements CommandExecutor {
 			if(Teams.isObservator((Player) sender)) {
 				sender.sendMessage(ChatColor.DARK_PURPLE + "You are currently in the " + ChatColor.AQUA + "Observators Team" + ChatColor.DARK_PURPLE + ".");
 				return true;
-			} else {
-				sender.sendMessage(ChatColor.RED + "PGM has find an error. Please report this to the server staff!");
 			}
 		}
 		return false;

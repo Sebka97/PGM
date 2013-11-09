@@ -35,6 +35,11 @@ public class MapYAML {
 		return core;
 	}
 	
+	public static int getMaxPlayers() {
+		// TODO File
+		return 25;
+	}
+	
 	public static String getRedName() {
 		// TODO File
 		return "Red Team";
@@ -66,6 +71,10 @@ public class MapYAML {
 	}
 	
 	public static void setBlueCoreLocation(Location location) {
+		// TODO File
+	}
+	
+	public static void setMaxPlayers(int amount) {
 		// TODO File
 	}
 	

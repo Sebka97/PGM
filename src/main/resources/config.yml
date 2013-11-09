@@ -1,0 +1,9 @@
+# Setting PGM for BungeeCord by md-5
+bungee-cord:
+    # If server is running by BungeeCord set 'true'
+    enable: false
+    # Type name of Lobby server in BungeeCord
+    hub-server: lobby
+# List of loaded maps
+map-list:
+    - DefaultMap
